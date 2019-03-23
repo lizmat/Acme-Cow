@@ -10,11 +10,14 @@
   "name" : "Acme::Cow",
   "perl" : "6.c",
   "provides" : {
-    "Acme::Cow" : "lib/Acme/Cow.pm6"
+    "Acme::Cow" : "lib/Acme/Cow.pm6",
+    "Acme::Cow::TextBalloon" : "lib/Acme/Cow/TextBalloon.pm6"
   },
   "resources" : [ ],
-  "source-url" : "",
-  "tags" : ["CPAN5"],
+  "source-url" : "https://github.com/lizmat/Acme-Cow.git",
+  "tags" : [
+    "CPAN5"
+  ],
   "test-depends" : [ ],
   "version" : "0.0.1"
 }

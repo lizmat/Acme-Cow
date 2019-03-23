@@ -23,14 +23,14 @@ class Acme::Cow:ver<0.0.1>:auth<cpan:ELIZABETH> {
     EOC
 
     multi method think()    { $.mode = 'think' }
-    multi method think(*@_) { self.think; self.text(@_) }
+    multi method think(*@_) { $.mode = 'think'; self.text(@_) }
 
     multi method say()    { $.mode = 'say' }
-    multi method say(*@_) { self.say; self.text(@_) }
+    multi method say(*@_) { $.mode = 'say'; self.text(@_) }
 
-    multi method text()    { @.text }
-    multi method text(@_)  { @.text = @_ }
-    multi method text(*@_) { @.text = @_ }
+    multi method text()    { @!text }
+    multi method text(@_)  { @!text = @_ }
+    multi method text(*@_) { @!text = @_ }
 
     method print($handle = $*OUT) { $handle.print(self.as-string) }
 
@@ -39,7 +39,7 @@ class Acme::Cow:ver<0.0.1>:auth<cpan:ELIZABETH> {
         # set up mapper
         my %mapper =
           balloon => Acme::Cow::TextBalloon.new(
-            :$.fill, :@.text, :$.over, :$.mode, :$.wrap),
+            :$.fill, :@.text, :$.over, :$.mode, :$.wrap).as-string,
           el => $.el,
           er => $.er,
           U  => $.U,

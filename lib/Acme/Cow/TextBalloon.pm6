@@ -93,7 +93,7 @@ class Acme::Cow::TextBalloon:ver<0.0.1>:auth<cpan:ELIZABETH> {
           (sprintf($format, @border[2], @message[*-1], @border[3])
             if @message >= 2),
 
-          "$shove " ~ ("-" x $max2) ~ "\n"
+          "$shove " ~ ("-" x $max2)
     }
 }
 

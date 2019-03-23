@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/lizmat/Acme-Cow.svg?branch=master)](https://travis-ci.org/lizmat/Acme-Cow)
+
 NAME
 ====
 
@@ -126,7 +128,7 @@ Elizabeth Mattijsen <liz@wenzperl.nl>
 COPYRIGHT AND LICENSE
 =====================
 
-Original Perl 5 version: Copyright 2002 Tony McEnroe Perl 6 adaptation: Copyright 2019 Elizabeth Mattijsen
+Original Perl 5 version: Copyright 2002 Tony McEnroe, Perl 6 adaptation: Copyright 2019 Elizabeth Mattijsen
 
 This library is free software; you can redistribute it and/or modify it under the Artistic License 2.0.
 
