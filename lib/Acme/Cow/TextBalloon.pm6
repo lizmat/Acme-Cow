@@ -62,10 +62,10 @@ class Acme::Cow::TextBalloon:ver<0.0.1>:auth<cpan:ELIZABETH> {
 
         # set up parameters
         my @message = self!fill_text;
-        my $max     = @message>>.chars.max;
+        my $max     = @message ?? @message>>.chars.max !! 0;
         my $max2    = $max + 2;        ## border space fudge.
-        my @balloon_lines;
         my $shove   = " " x $.over;
+        my $format  = "$shove%s %-{$max}s %s\n";
 
         # set up border markers
         my @border; ## up-left, up-right, down-left, down-right, left, right
@@ -79,13 +79,10 @@ class Acme::Cow::TextBalloon:ver<0.0.1>:auth<cpan:ELIZABETH> {
             @border = < / \ \ / | | >;
         }
 
-        # set up basic begin format
-        my $format = "$shove%s %-{$max}s %s\n";
-
         # create the final result and return it
         "$shove " ~ ("_" x $max2) ~ "\n",
 
-          sprintf($format, @border[0], @message[0], @border[1]),
+          sprintf($format, @border[0], @message[0] // "", @border[1]),
 
           (@message[1 .. *-2].map( {
               sprintf($format, @border[4], $_, @border[5])
