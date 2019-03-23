@@ -1,0 +1,20 @@
+{
+  "auth" : "cpan:ELIZABETH",
+  "authors" : [
+    "Elizabeth Mattijsen"
+  ],
+  "build-depends" : [ ],
+  "depends" : [ ],
+  "description" : "Talking barnyard animals (or ASCII art in general)",
+  "license" : "Artistic-2.0",
+  "name" : "Acme::Cow",
+  "perl" : "6.c",
+  "provides" : {
+    "Acme::Cow" : "lib/Acme/Cow.pm6"
+  },
+  "resources" : [ ],
+  "source-url" : "",
+  "tags" : ["CPAN5"],
+  "test-depends" : [ ],
+  "version" : "0.0.1"
+}
