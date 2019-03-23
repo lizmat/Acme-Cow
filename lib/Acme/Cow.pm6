@@ -50,6 +50,8 @@ class Acme::Cow:ver<0.0.1>:auth<cpan:ELIZABETH> {
         ($cow // $.File ?? $.File.IO.slurp !! $default-cow)
           .subst(/ '{$' (\w+) '}' /, -> $/ { %mapper{$0} }, :g)
     }
+
+    method sink() { self.print }
 }
 
 =begin pod
