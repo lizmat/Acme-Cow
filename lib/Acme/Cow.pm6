@@ -21,9 +21,8 @@ class Acme::Cow:ver<0.0.1>:auth<cpan:ELIZABETH>
     EOC
 
     method as_string($cow?) {
-
-        # set up mapper
-        my %mapper =
+        self.process_template(
+          ($cow // ($.File ?? $.File.IO.slurp !! $default-cow)),
           balloon => Acme::Cow::TextBalloon.new(
             :$.fill, :@.text, :$.over, :$.mode, :$.wrap).as_string.chomp,
           el => $.el,
@@ -31,11 +30,12 @@ class Acme::Cow:ver<0.0.1>:auth<cpan:ELIZABETH>
           U  => $.U,
           tl => $.mode eq 'think' ?? 'o' !! '\\',
           tr => $.mode eq 'think' ?? 'o' !! '/',
-        ;
+        )
+    }
 
-        # Text::Template in a nutshell
-        ($cow // ($.File ?? $.File.IO.slurp !! $default-cow))
-          .subst(/ '{$' (\w+) '}' /, -> $/ { %mapper{$0} }, :g)
+    # Text::Template in a nutshell
+    method process_template($text, *%mapper) {
+        $text.subst(/ '{$' (\w+) '}' /, -> $/ { %mapper{$0} }, :g)
     }
 }
 
