@@ -1,11 +1,10 @@
 use v6.c;
 
-class Acme::Cow::TextBalloon:ver<0.0.1>:auth<cpan:ELIZABETH> {
-    has  Int $.over is rw = 0;
-    has  Int $.wrap is rw = 40;
-    has  Str $.mode is rw = 'say';
-    has Bool $.fill is rw = True;
-    has      @.text;
+use Acme::Cow::Text:ver<0.0.1>:auth<cpan:ELIZABETH>;
+
+class Acme::Cow::TextBalloon:ver<0.0.1>:auth<cpan:ELIZABETH>
+  does Acme::Cow::Text
+{
 
     method as-list()   { self!construct }
     method as-string() { self!construct.join }
@@ -22,13 +21,19 @@ class Acme::Cow::TextBalloon:ver<0.0.1>:auth<cpan:ELIZABETH> {
         my @result;
         my $current = "";
         my $count;
+        my $empty;
+
+        my @words = @lines.join(" ").words;
+
+        # make sure we keep initial whitespace
+        @words.unshift($0.chop) if @lines[0] ~~ m/^ (\s+) /;
 
         # for all the words
-        for @lines.join(" ").words -> $word {
+        for @words -> $word {
             $count = $current.chars;
 
             # something already
-            if $count {
+            if $count || $empty {
 
                 # won't fit
                 if $count + 1 + $word.chars > $.wrap {
@@ -40,6 +45,7 @@ class Acme::Cow::TextBalloon:ver<0.0.1>:auth<cpan:ELIZABETH> {
                 else {
                     $current = "$current $word";
                 }
+                $empty = False;
             }
 
             # single word doesn't fit, just use the whole word
@@ -49,7 +55,7 @@ class Acme::Cow::TextBalloon:ver<0.0.1>:auth<cpan:ELIZABETH> {
 
             # start a new line
             else {
-                $current = $word;
+                $word ?? ($current = $word) !! ($empty = True);
             }
         }
 
@@ -80,17 +86,19 @@ class Acme::Cow::TextBalloon:ver<0.0.1>:auth<cpan:ELIZABETH> {
         }
 
         # create the final result and return it
-        "$shove " ~ ("_" x $max2) ~ "\n",
-
-          sprintf($format, @border[0], @message[0] // "", @border[1]),
-
-          (@message[1 .. *-2].map( {
+        my @result =
+          "$shove " ~ ("_" x $max2) ~ "\n",
+          sprintf($format, @border[0], @message[0] // "", @border[1])
+        ;
+        if @message >= 2 {
+            @result.push(
               sprintf($format, @border[4], $_, @border[5])
-          } ) if @message >= 2),
-          (sprintf($format, @border[2], @message[*-1], @border[3])
-            if @message >= 2),
-
-          "$shove " ~ ("-" x $max2)
+            ) for @message[1 .. *-2];
+            @result.push(
+              sprintf($format, @border[2], @message[*-1], @border[3])
+            );
+        }
+        @result.push("$shove " ~ ("-" x $max2) ~ "\n")
     }
 }
 

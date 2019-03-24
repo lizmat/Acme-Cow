@@ -1,17 +1,15 @@
 use v6.c;
 
+use Acme::Cow::Text:ver<0.0.1>:auth<cpan:ELIZABETH>;
 use Acme::Cow::TextBalloon:ver<0.0.1>:auth<cpan:ELIZABETH>;
 
-class Acme::Cow:ver<0.0.1>:auth<cpan:ELIZABETH> {
-    has  Int $.over is rw = 0;
-    has  Int $.wrap is rw = 40;
-    has  Str $.mode is rw = 'say';
-    has Bool $.fill is rw = True;
+class Acme::Cow:ver<0.0.1>:auth<cpan:ELIZABETH>
+  does Acme::Cow::Text
+{
     has  Str $.el   is rw = 'o';
     has  Str $.er   is rw = 'o';
-    has  Str $.U    is rw = 'U ';
+    has  Str $.U    is rw = '  ';
     has  Str $.File;
-    has      @.text;
 
     my $default-cow = q:to/EOC/;
     {$balloon}
@@ -22,24 +20,12 @@ class Acme::Cow:ver<0.0.1>:auth<cpan:ELIZABETH> {
                     ||     ||
     EOC
 
-    multi method think()    { $.mode = 'think' }
-    multi method think(*@_) { $.mode = 'think'; self.text(@_) }
-
-    multi method say()    { $.mode = 'say' }
-    multi method say(*@_) { $.mode = 'say'; self.text(@_) }
-
-    multi method text()    { @!text }
-    multi method text(@_)  { @!text = @_ }
-    multi method text(*@_) { @!text = @_ }
-
-    method print($handle = $*OUT) { $handle.print(self.as-string) }
-
     method as-string($cow?) {
 
         # set up mapper
         my %mapper =
           balloon => Acme::Cow::TextBalloon.new(
-            :$.fill, :@.text, :$.over, :$.mode, :$.wrap).as-string,
+            :$.fill, :@.text, :$.over, :$.mode, :$.wrap).as-string.chomp,
           el => $.el,
           er => $.er,
           U  => $.U,
@@ -47,11 +33,10 @@ class Acme::Cow:ver<0.0.1>:auth<cpan:ELIZABETH> {
           tr => $.mode eq 'think' ?? 'o' !! '/',
         ;
 
-        ($cow // $.File ?? $.File.IO.slurp !! $default-cow)
+        # Text::Template in a nutshell
+        ($cow // ($.File ?? $.File.IO.slurp !! $default-cow))
           .subst(/ '{$' (\w+) '}' /, -> $/ { %mapper{$0} }, :g)
     }
-
-    method sink() { self.print }
 }
 
 =begin pod
