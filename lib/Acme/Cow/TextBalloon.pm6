@@ -6,8 +6,8 @@ class Acme::Cow::TextBalloon:ver<0.0.1>:auth<cpan:ELIZABETH>
   does Acme::Cow::Text
 {
 
-    method as-list()   { self!construct }
-    method as-string() { self!construct.join }
+    method as_list()   { self!construct }
+    method as_string() { self!construct.join }
 
     method add(*@_) { @.text.append(@_) }
 

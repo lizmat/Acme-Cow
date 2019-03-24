@@ -17,7 +17,7 @@ sub compare_bubbles($a,$b) {
 
 my $x = Acme::Cow.new(File => "t/eyes.cow".IO.e ?? "t/eyes.cow" !! "eyes.cow");
 $x.text("Bwahaha!");
-compare_bubbles($x.as-string, Q:to/EOC/);
+compare_bubbles($x.as_string, Q:to/EOC/);
  __________
 < Bwahaha! >
  ----------

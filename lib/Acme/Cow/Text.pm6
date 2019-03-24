@@ -26,8 +26,8 @@ role Acme::Cow::Text:ver<0.0.1>:auth<cpan:ELIZABETH> {
     multi method text(@_)  { @!text = @_ }
     multi method text(*@_) { @!text = @_ }
 
-    method as-string() { ... }
-    method print($handle = $*OUT) { $handle.print(self.as-string) }
+    method as_string() { ... }
+    method print($handle = $*OUT) { $handle.print(self.as_string) }
     method sink() { self.print }
 
 }

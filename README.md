@@ -94,7 +94,7 @@ fill
 
 Inform the cow to fill and adjust (or not) the text inside its balloon. By default, text inside the balloon is filled and adjusted.
 
-as-string
+as_string
 ---------
 
 Render the cow as a string.

@@ -20,12 +20,12 @@ class Acme::Cow:ver<0.0.1>:auth<cpan:ELIZABETH>
                     ||     ||
     EOC
 
-    method as-string($cow?) {
+    method as_string($cow?) {
 
         # set up mapper
         my %mapper =
           balloon => Acme::Cow::TextBalloon.new(
-            :$.fill, :@.text, :$.over, :$.mode, :$.wrap).as-string.chomp,
+            :$.fill, :@.text, :$.over, :$.mode, :$.wrap).as_string.chomp,
           el => $.el,
           er => $.er,
           U  => $.U,
@@ -141,7 +141,7 @@ Print a representation of the cow to the specified filehandle
 Inform the cow to fill and adjust (or not) the text inside its balloon.
 By default, text inside the balloon is filled and adjusted.
 
-=head2 as-string
+=head2 as_string
 
 Render the cow as a string.
 

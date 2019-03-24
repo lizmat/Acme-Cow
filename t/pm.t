@@ -17,7 +17,7 @@ sub compare_bubbles($a,$b) {
 
 my $x = Acme::Cow::Frogs.new;
 $x.text('Hi.');
-compare_bubbles($x.as-string, Q:to/EOC/);
+compare_bubbles($x.as_string, Q:to/EOC/);
                                                _____
                                               < Hi. >
                                                -----

@@ -16,5 +16,4 @@ my $frogs = Q:to/EOC/;
 EOC
 
 method new(|c) { callwith( |c, over => 46 ) }
-
-method as-string() { callwith($frogs) }
+method as_string() { callwith($frogs) }

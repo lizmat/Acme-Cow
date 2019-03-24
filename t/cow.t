@@ -18,7 +18,7 @@ sub compare_bubbles($a,$b) {
 
 my $x = Acme::Cow.new;
 $x.text('Hi.');
-compare_bubbles($x.as-string, Q:to/EOC/);
+compare_bubbles($x.as_string, Q:to/EOC/);
  _____
 < Hi. >
  -----
@@ -31,7 +31,7 @@ EOC
 $x.print;
 
 $x.think;
-compare_bubbles($x.as-string, Q:to/EOC/);
+compare_bubbles($x.as_string, Q:to/EOC/);
  _____
 ( Hi. )
  -----
@@ -44,7 +44,7 @@ EOC
 $x.print;
 
 $x.text(' Hi.');
-compare_bubbles($x.as-string(), Q:to/EOC/);
+compare_bubbles($x.as_string(), Q:to/EOC/);
  ______
 (  Hi. )
  ------

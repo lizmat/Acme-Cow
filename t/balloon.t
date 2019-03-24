@@ -18,7 +18,7 @@ sub compare_bubbles($a,$b) {
 
 my $x = Acme::Cow::TextBalloon.new;
 $x.text("Hi.");
-compare_bubbles($x.as-string, Q:to/EOB/);
+compare_bubbles($x.as_string, Q:to/EOB/);
  _____
 < Hi. >
  -----
@@ -29,7 +29,7 @@ $x.think;
 $x.adjust(0);
 $x.text(" Hi.");
 $x.over(6);
-compare_bubbles($x.as-string, Q:to/EOB/);
+compare_bubbles($x.as_string, Q:to/EOB/);
        ______
       (  Hi. )
        ------
@@ -47,7 +47,7 @@ $x.text(
 "And the clean ones so seldom are comical.\n"
 );
 
-compare_bubbles($x.as-string, Q:to/EOB/);
+compare_bubbles($x.as_string, Q:to/EOB/);
  ___________________________________________
 / A limerick packs laughs anatomical        \
 | Into space that is quite economical.      |
