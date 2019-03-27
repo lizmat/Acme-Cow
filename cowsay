@@ -9,6 +9,9 @@ my $VERSION = "4.0";
 my $progname = $*PROGRAM-NAME;
 my $cowpath = $ENV{'COWPATH'} || ".";
 
+# preprocess arguments to handle -?
+$_ = "-q" if $_ eq "-?" for  @*ARGS
+
 ## One of these days, we'll get it ported to Windows.  Yeah, right.
 
 my $pathsep = $*DISTRO.is-win ?? ';' !! ':';
@@ -23,7 +26,7 @@ unit sub MAIN(
   :l($list),
   :n($nofill),
   :p($paranoid),
-#  :?($que),
+  :q($questionmark),
   :s($stoned),
   :t($tired),
   :v($verbose),
@@ -36,7 +39,7 @@ unit sub MAIN(
   :W($columns)        = 40,
 );
 
-if $help || $verbose { # || $que {
+if $help || $verbose || $questionmark {
     say $*USAGE;
     exit;
 }
