@@ -16,7 +16,7 @@ my $generic_ascii_art = Q:to/EOC/;
 EOC
 
 method new(|c) { callwith( over => 24, |c ) }
-method as_string() { callwith($my_cow) }
+method as_string() { callwith($generic_ascii_art) }
 
 =begin pod
 
