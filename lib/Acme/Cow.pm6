@@ -37,6 +37,8 @@ class Acme::Cow:ver<0.0.1>:auth<cpan:ELIZABETH>
     method process_template($text, *%mapper) {
         $text.subst(/ '{$' (\w+) '}' /, -> $/ { %mapper{$0} }, :g)
     }
+
+    method distribution() { $?DISTRIBUTION }
 }
 
 =begin pod
