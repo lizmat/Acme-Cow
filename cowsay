@@ -1,42 +1,37 @@
 #!/usr/bin/env perl6
 
 use Acme::Cow;
-#use File::Basename;
-#use File::Spec;
-#use Getopt::Std;
 
-my $VERSION = "4.0";
+my $VERSION  = "4.0";
 my $progname = $*PROGRAM-NAME;
-my $cowpath = $ENV{'COWPATH'} || ".";
+my $cowpath  = %*ENV<COWPATH> || ".";
 
 # preprocess arguments to handle -?
-$_ = "-q" if $_ eq "-?" for  @*ARGS
+$_ = "-q" if $_ eq "-?" for  @*ARGS;
 
 ## One of these days, we'll get it ported to Windows.  Yeah, right.
-
-my $pathsep = $*DISTRO.is-win ?? ';' !! ':';
+my $pathsep = $*DISTRO.path-sep;
 
 unit sub MAIN(
   *@text,
-  :b($borg),
-  :d($dead),
-  :f($file),
-  :h($help),
-  :g($greedy),
-  :l($list),
-  :n($nofill),
-  :p($paranoid),
-  :q($questionmark),
-  :s($stoned),
-  :t($tired),
-  :v($verbose),
-  :w($wired),
-  :W($wrap),
-  :y($young),
+  Bool :b($borg),
+  Bool :d($dead),
+  Bool :h($help),
+  Bool :g($greedy),
+  Bool :l($list),
+  Bool :n($nofill),
+  Bool :p($paranoid),
+  Bool :q($questionmark),
+  Bool :s($stoned),
+  Bool :t($tired),
+  Bool :v($verbose),
+  Bool :w($wired),
+  Bool :y($young),
 
-  :e($eyes)   is copy = 'oo',
-  :T($tongue) is copy = '  ',
-  :W($columns)        = 40,
+  Str :f($file),
+  Str :e($eyes)   is copy = 'oo',
+  Str :T($tongue) is copy = '  ',
+  Int :W($wrap)           = 40,
 );
 
 if $help || $verbose || $questionmark {
@@ -50,39 +45,34 @@ elsif $list {
 $eyes   .= substr(0, 2);
 $tongue .= substr(0, 2);
 
-@text = $*STDIN.lines(:!chomp) unless @text;
+@text = $*IN.lines(:!chomp) unless @text;
 my $cow = $file ?? variant_cow($file) !! Acme::Cow.new;
 construct_face($cow);
 
-$progname.endswith("think") ?? $cow.think(@text) !! @cow.say(@text);
+$progname.ends-with("think") ?? $cow.think(@text) !! $cow.say(@text);
 $cow.fill(False) if $nofill;
 $cow.wrap($wrap) if $wrap;
 $cow.print;
 
 sub list_cowfiles {
     my $basedir;
-    for my $d (split(/$pathsep/, $cowpath)) {
-        print "Cow files in $d:\n";
-        opendir(COWDIR, $d) || die "$0: Cannot open $d\n";
-        for my $file (readdir COWDIR) {
-            if ($file =~ s/\.cow$//) {
-                print $file, "\n";
-            }
-        }
-        closedir(COWDIR);
+    for $cowpath.split($pathsep) -> $dir {
+        say "Cow files in $dir:";
+        .Str.say if .ends-with('.cow') for dir($dir);
     }
-    print "Cow files installed as modules:\n";
-    for my $d (@INC) {
-        my @files = glob("$d/Acme/Cow/*.pm");
-        for my $file (@files) {
-            next if (basename($file) eq "TextBalloon.pm");
-            print basename($file, ".pm"), "\n";
-        }
-    }
-    exit(0);
+# alas, not enough introspection yet
+#    say "Cow files installed as modules:";
+#    for my $d (@INC) {
+#        my @files = glob("$d/Acme/Cow/*.pm");
+#        for my $file (@files) {
+#            next if (basename($file) eq "TextBalloon.pm");
+#            print basename($file, ".pm"), "\n";
+#        }
+#    }
+    exit;
 }
 
-sub construct_face {
+sub construct_face($cow) {
     if $borg     { $eyes = "=="; }
     if $dead     { $eyes = "xx"; $tongue = "U "; }
     if $greedy   { $eyes = "\$\$"; }
@@ -97,36 +87,23 @@ sub construct_face {
     $cow.U  = $tongue;
 }
 
-sub variant_cow 
-{
-    my $f = shift;
-    my $full;
-    my $fn;
-    if ($f =~ /^\w[\d\w]+$/) {
-        my $package = "Acme::Cow::$f";
-        eval "require $package;";
-        if (not $@) {
-            return $package->new();
+sub variant_cow($name) {
+    if $name ~~ /^ \w <[\d\w]>+ $/ {
+        my $module = "Acme::Cow::$name";
+        try require ::($module);
+        return ::($module).new unless ::($module) ~~ Failure;
+    }
+
+    if $name.contains("/") {
+        return Acme::Cow.new(File => $name) if $name.IO.e;
+    }
+    else {
+        my $file = $name.ends-with('.cow') ?? $name !! "$name.cow";
+        for $cowpath.split($pathsep)>>.IO>>.child($file) -> $path {
+            return Acme::Cow.new(File => ~$path) if $path.e;
         }
     }
-    if ($f =~ m,/,) {
-        $full = $f;
-    } else {
-        for my $d (split(/$pathsep/, $cowpath)) {
-            $fn = File::Spec->catfile($d, $f);
-            if (-f $fn) {
-                $full = $fn;
-                last;
-            } elsif (-f "$fn.cow") {
-                $full = "$fn.cow";
-                last;
-            }
-        }
-        if (not $full) {
-            die "$progname: Could not find $f cow variant!\n";
-        }
-    }
-    Acme::Cow.new(File => $full);
+    die "$progname: Could not find $name cow variant!";
 }
 
 =begin pod
@@ -244,3 +221,5 @@ a particular format: I<subject> is I<verb>ing I<object>.  Cowsay
 and thought capabilities.  Cowsay 3 (1999) was a rewrite in Perl
 5.  Cowsay 4 (2002) leverages Perl's object facilities to make the
 author's life easier.
+
+=end pod
