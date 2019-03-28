@@ -1,6 +1,7 @@
 Revision history for Acme-Cow
 
 {{$NEXT}}
+    - Move scripts into the "bin" directory, so they get installed
 
 0.0.1  2019-03-28T12:38:45+01:00
     - Initial version

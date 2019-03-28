@@ -3,7 +3,7 @@ use v6.c;
 use Acme::Cow::Text:ver<0.0.1>:auth<cpan:ELIZABETH>;
 use Acme::Cow::TextBalloon:ver<0.0.1>:auth<cpan:ELIZABETH>;
 
-class Acme::Cow:ver<0.0.1>:auth<cpan:ELIZABETH>
+class Acme::Cow:ver<0.0.2>:auth<cpan:ELIZABETH>
   does Acme::Cow::Text
 {
     has  Str $.el   is rw = 'o';
