@@ -1,6 +1,6 @@
 use v6.c;
 
-role Acme::Cow::Text:ver<0.0.1>:auth<cpan:ELIZABETH> {
+role Acme::Cow::Text:ver<0.0.2>:auth<cpan:ELIZABETH> {
     has  Int $.over = 0;
     has  Int $.wrap = 40;
     has Bool $.fill = True;
