@@ -1,25 +1,27 @@
 {
-  "auth" : "cpan:ELIZABETH",
-  "authors" : [
+  "auth": "zef:lizmat",
+  "authors": [
     "Elizabeth Mattijsen"
   ],
-  "build-depends" : [ ],
-  "depends" : [ ],
-  "description" : "Talking barnyard animals (or ASCII art in general)",
-  "license" : "Artistic-2.0",
-  "name" : "Acme::Cow",
-  "perl" : "6.c",
-  "provides" : {
-    "Acme::Cow" : "lib/Acme/Cow.pm6",
-    "Acme::Cow::DragonAndCow" : "lib/Acme/Cow/DragonAndCow.pm6",
-    "Acme::Cow::Example" : "lib/Acme/Cow/Example.pm6",
-    "Acme::Cow::Frogs" : "lib/Acme/Cow/Frogs.pm6",
-    "Acme::Cow::MechAndCow" : "lib/Acme/Cow/MechAndCow.pm6",
-    "Acme::Cow::Stegosaurus" : "lib/Acme/Cow/Stegosaurus.pm6",
-    "Acme::Cow::TextBalloon" : "lib/Acme/Cow/TextBalloon.pm6",
-    "Acme::Cow::TuxStab" : "lib/Acme/Cow/TuxStab.pm6"
+  "build-depends": [
+  ],
+  "depends": [
+  ],
+  "description": "Talking barnyard animals (or ASCII art in general)",
+  "license": "Artistic-2.0",
+  "name": "Acme::Cow",
+  "perl": "6.c",
+  "provides": {
+    "Acme::Cow": "lib/Acme/Cow.rakumod",
+    "Acme::Cow::DragonAndCow": "lib/Acme/Cow/DragonAndCow.rakumod",
+    "Acme::Cow::Example": "lib/Acme/Cow/Example.rakumod",
+    "Acme::Cow::Frogs": "lib/Acme/Cow/Frogs.rakumod",
+    "Acme::Cow::MechAndCow": "lib/Acme/Cow/MechAndCow.rakumod",
+    "Acme::Cow::Stegosaurus": "lib/Acme/Cow/Stegosaurus.rakumod",
+    "Acme::Cow::TextBalloon": "lib/Acme/Cow/TextBalloon.rakumod",
+    "Acme::Cow::TuxStab": "lib/Acme/Cow/TuxStab.rakumod"
   },
-  "resources" : [
+  "resources": [
     "cows/bong.cow",
     "cows/bunny.cow",
     "cows/cheese.cow",
@@ -65,10 +67,11 @@
     "cows/www.cow",
     "cows/zen-beavis.cow"
   ],
-  "source-url" : "https://github.com/lizmat/Acme-Cow.git",
-  "tags" : [
+  "source-url": "https://github.com/lizmat/Acme-Cow",
+  "tags": [
     "CPAN5"
   ],
-  "test-depends" : [ ],
-  "version" : "0.0.4"
+  "test-depends": [
+  ],
+  "version": "0.0.5"
 }

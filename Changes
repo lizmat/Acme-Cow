@@ -2,6 +2,13 @@ Revision history for Acme-Cow
 
 {{$NEXT}}
 
+0.0.5  2021-09-09T19:13:15+02:00
+    - Change file extension to .rakumod
+    - Migrate to zef ecosystem
+    - Update email address
+    - Update copyright year
+    - Change some Perl 6 references to Raku
+
 0.0.4  2019-04-01T19:46:26+02:00
     - Make sure subclasses use "our" Acme::Cow
 

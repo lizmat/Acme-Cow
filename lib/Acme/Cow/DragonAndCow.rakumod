@@ -1,8 +1,8 @@
-use v6.c;
+use v6.*;
 
-use Acme::Cow:auth<cpan:ELIZABETH>;
+use Acme::Cow:ver<0.0.5>:auth<zef:lizmat>;
 
-unit class Acme::Cow::DragonAndCow:ver<0.0.4>:auth<cpan:ELIZABETH> is Acme::Cow;
+unit class Acme::Cow::DragonAndCow:ver<0.0.5>:auth<zef:lizmat> is Acme::Cow;
 
 my $dragon_and_cow = Q:to/EOC/;
 {$balloon}

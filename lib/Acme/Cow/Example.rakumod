@@ -1,8 +1,8 @@
-use v6.c;
+use v6.*;
 
-use Acme::Cow:auth<cpan:ELIZABETH>;
+use Acme::Cow:ver:<0.0.5>:auth<zef:lizmat>;
 
-unit class Acme::Cow::Example:ver<0.0.4>:auth<cpan:ELIZABETH> is Acme::Cow;
+unit class Acme::Cow::Example:ver<0.0.5>:auth<zef:lizmat> is Acme::Cow;
 
 my $generic_ascii_art = Q:to/EOC/;
 {$balloon}
@@ -65,7 +65,7 @@ No, it won't be very exciting.
 
 =head1 Acme::Cow::Example code
 
-  unit class Acme::Cow::Example:ver<0.0.4>:auth<cpan:ELIZABETH> is Acme::Cow;
+  unit class Acme::Cow::Example:ver<0.0.5>:auth<zef:lizmat> is Acme::Cow;
 
   my $generic_ascii_art = Q:to/EOC/;
   {$balloon}
@@ -102,12 +102,12 @@ L<Acme::Cow>, L<cowpm>
 
 =head1 AUTHOR
 
-Elizabeth Mattijsen <liz@wenzperl.nl>
+Elizabeth Mattijsen <liz@raku.rocks>
 
 =head1 COPYRIGHT AND LICENSE
 
 Original Perl 5 version: Copyright 2002 Tony McEnroe,
-Perl 6 adaptation: Copyright 2019 Elizabeth Mattijsen
+Raku adaptation: Copyright 2019, 2021 Elizabeth Mattijsen
 
 This library is free software; you can redistribute it and/or modify it under the Artistic License 2.0.
 

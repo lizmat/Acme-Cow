@@ -1,8 +1,8 @@
 use v6.c;
 
-use Acme::Cow::TextBalloon:ver<0.0.4>:auth<cpan:ELIZABETH>;
+use Acme::Cow::TextBalloon:ver<0.0.5>:auth<zef:lizmat>;
 
-class Acme::Cow:ver<0.0.4>:auth<cpan:ELIZABETH> {
+class Acme::Cow:ver<0.0.5>:auth<zef:lizmat> {
     has  Str $.el   is rw = 'o';
     has  Str $.er   is rw = 'o';
     has  Str $.U    is rw = '  ';
@@ -60,8 +60,6 @@ class Acme::Cow:ver<0.0.4>:auth<cpan:ELIZABETH> {
     method process_template($text, *%mapper) {
         $text.subst(/ '{$' (\w+) '}' /, -> $/ { %mapper{$0} }, :g)
     }
-
-    method distribution() { $?DISTRIBUTION }
 }
 
 =begin pod
@@ -206,12 +204,12 @@ L<perl>, L<cowsay>, L<figlet>, L<fortune>, L<cowpm>
 
 =head1 AUTHOR
 
-Elizabeth Mattijsen <liz@wenzperl.nl>
+Elizabeth Mattijsen <liz@raku.rocks>
 
 =head1 COPYRIGHT AND LICENSE
 
-Original Perl 5 version: Copyright 2002 Tony McEnroe,
-Perl 6 adaptation: Copyright 2019 Elizabeth Mattijsen
+Original Perl version: Copyright 2002 Tony McEnroe,
+Raku adaptation: Copyright 2019, 2021 Elizabeth Mattijsen
 
 This library is free software; you can redistribute it and/or modify it under the Artistic License 2.0.
 

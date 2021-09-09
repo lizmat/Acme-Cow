@@ -1,6 +1,6 @@
-use v6.c;
+use v6.*;
 
-class Acme::Cow::TextBalloon:ver<0.0.4>:auth<cpan:ELIZABETH> {
+class Acme::Cow::TextBalloon:ver<0.0.5>:auth<zef:lizmat> {
     has  Int $.over = 0;
     has  Int $.wrap = 40;
     has Bool $.fill = True;
@@ -165,12 +165,12 @@ cow.
 
 =head1 AUTHOR
 
-Elizabeth Mattijsen <liz@wenzperl.nl>
+Elizabeth Mattijsen <liz@raku.rocks>
 
 =head1 COPYRIGHT AND LICENSE
 
 Original Perl 5 version: Copyright 2002 Tony McEnroe,
-Perl 6 adaptation: Copyright 2019 Elizabeth Mattijsen
+Raku adaptation: Copyright 2019, 2021 Elizabeth Mattijsen
 
 This library is free software; you can redistribute it and/or modify it under the Artistic License 2.0.
 
